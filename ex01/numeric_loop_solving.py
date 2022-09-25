@@ -6,7 +6,7 @@ def abc_solver(a: float, b: float, eps: float, func):
     params:
             a: lower bound
             b: upper bound
-            eps: epsilon range
+            eps: epsilon error range
             func: function to test for
     """
     # Check whether the inputs can be used: a as lower bound and b as upper bound
@@ -18,8 +18,7 @@ def abc_solver(a: float, b: float, eps: float, func):
             return
 
     while True:
-        c = (a + b) / 2
-
+        c: float = (a + b) / 2
         # only recheck bounds if outside epsilon region
         if not abs(a - b) < eps:
             if func(c) > 0:
@@ -37,14 +36,20 @@ def par_q_solver(a: float, b: float, c: float):
 
 
 if __name__ == "__main__":
-    print(
-        f"x**x-100 = 0, x = {abc_solver(-100, 100, 1/1_000_000, lambda x : x**x - 100)}"
-    )
-    print(
-        f"1x^2 + 1x + 0 = 0, x = {abc_solver(-100, 100, 1/1_000_000, lambda x: x**2 + x)}"
-    )
-    print(
-        f"35x^2 + 15x + 1144 = 0, x = {abc_solver(-100, 100, 1/1_000_000_000, lambda x: 35*(x**2) + 15*x + 1144)}"
-    )
+    print("Solving for 'x**x-100 = 0,':")
+    print(f"\tabc solver: x = {abc_solver(-100, 100, 1e-6, lambda x : x**x - 100)}")
 
-    print(par_q_solver(35, 15, 0))
+    print("Solving for '1x^2 + 1x + 0 = 0':")
+    print(f"\tabc solver: x = {abc_solver(-5, 5, 1e-6, lambda x: x**2 + x)}")
+    print(f"\tq solver: {par_q_solver(1, 1, 0)}")
+
+    print("Solving for '35x^2 + 15x - 10 = 0':")
+    print(
+        f"\tabc solver: x = {abc_solver(-100, 100, 1e-9, lambda x: 35*(x**2) + 15*x - 10)}"
+    )
+    print(f"\tq solver: {par_q_solver(35, 15, -10)}")
+
+    print("Solving for '35x^3 + 15x^2 - 10x = 0':")
+    print(
+        f"\tabc solver: x = {abc_solver(-100, 100, 1e-9, lambda x: 35*(x**3) + 15*(x**2) - 10*x)}"
+    )
