@@ -1,3 +1,5 @@
+#!/bin/python3
+
 import numpy as np
 
 
@@ -14,8 +16,6 @@ def abc_solver(a: float, b: float, eps: float, func):
         tmp = a
         a = b
         b = tmp
-        if a > 0 and b > 0 or a < 0 and b < 0:
-            return
 
     while True:
         c: float = (a + b) / 2
