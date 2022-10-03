@@ -28,9 +28,9 @@ def fKeplerPrime(E):
 def newton(f, fPrime, Estart, M):
     # print(M)
     E = Estart
-    Enew = E + 1
     tol = 0.001
-    while abs(E - Enew) > tol:
+    dx = tol + 1
+    while abs(dx) > tol:
         dx = -f(E, M) / fPrime(E)
         Enew = E + dx
         E = Enew
@@ -76,5 +76,5 @@ if __name__ == "__main__":
 
     plt.scatter(0, 0)
     # plt.show()
-    # ani.save("kepler_equation.mp4", writer="ffmpeg", dpi=250)
+    ani.save("kepler_equation.mp4", writer="ffmpeg", dpi=250)
     plt.show()
