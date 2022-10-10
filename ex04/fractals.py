@@ -2,14 +2,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# def FractalMeshgrid(X: np.ndarray, Y: np.ndarray, c: complex):
-# def drawFractal():
-#     return
 
-
-if __name__ == "__main__":
-    fig, ax = plt.subplots()
-
+def getFractal(use_const: bool, constant=0.0):
     x_res = 500
     y_res = 500
     x_linspace = np.linspace(-2.0, 1.0, x_res)
@@ -29,9 +23,23 @@ if __name__ == "__main__":
         # initial condition used for the meshgrids
         cond = Z < rmax
         # apply for each value that does not exceed/diverge
-        Z[cond] = Z[cond] ** 2 + C[cond]
+        if use_const:
+            Z[cond] = Z[cond] ** 2 + constant
+        else:
+            Z[cond] = Z[cond] ** 2 + C[cond]
         count[cond] += 1
         k += 1
+    return C, count
+
+
+# def drawFractal():
+#     return
+
+
+if __name__ == "__main__":
+    fig, ax = plt.subplots()
+
+    C, count = getFractal(True, -0.5)
 
     # print("done")
     ax.scatter(C.real, C.imag, s=1, c=count)
