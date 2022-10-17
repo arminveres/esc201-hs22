@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def getFractal(use_const: bool, constant=0.0):
+def getFractal(draw_julia: bool, constant=0.0):
     x_res = 500
     y_res = 500
     x_linspace = np.linspace(-2.0, 1.0, x_res)
@@ -23,7 +23,7 @@ def getFractal(use_const: bool, constant=0.0):
         # initial condition used for the meshgrids
         cond = Z < rmax
         # apply for each value that does not exceed/diverge
-        if use_const:
+        if draw_julia:
             Z[cond] = Z[cond] ** 2 + constant
         else:
             Z[cond] = Z[cond] ** 2 + C[cond]
@@ -32,17 +32,23 @@ def getFractal(use_const: bool, constant=0.0):
     return C, count
 
 
-# def drawFractal():
-#     return
-
-
 if __name__ == "__main__":
+
     fig, ax = plt.subplots()
-
-    C, count = getFractal(True, -0.5)
-
-    # print("done")
+    C, count = getFractal(draw_julia=False, constant=0)
     ax.scatter(C.real, C.imag, s=1, c=count)
+    plt.plot()
+    plt.savefig("mandelbrot.png")
 
-    # plt.plot()
-    plt.show()
+    fig, ax = plt.subplots()
+    C, count = getFractal(draw_julia=True, constant=0.5 - 0.5j)
+    ax.scatter(C.real, C.imag, s=1, c=count)
+    plt.plot()
+    plt.savefig("julia0.5.png")
+
+    fig, ax = plt.subplots()
+    C, count = getFractal(draw_julia=True, constant=0.8 - 0.8j)
+    ax.scatter(C.real, C.imag, s=1, c=count)
+    plt.plot()
+    plt.savefig("julia0.8.png")
+
