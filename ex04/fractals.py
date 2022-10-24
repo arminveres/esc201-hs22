@@ -21,7 +21,7 @@ def getFractal(draw_julia: bool, constant=0.0):
     k = 0
     while k < 100:
         # initial condition used for the meshgrids
-        cond = Z < rmax
+        cond = abs(Z) < rmax
         # apply for each value that does not exceed/diverge
         if draw_julia:
             Z[cond] = Z[cond] ** 2 + constant
