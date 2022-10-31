@@ -39,13 +39,15 @@ def euler(p, q, h, odeSystem):
     return (p, q)
 
 
-# def rk2MidPoint(p, q, h, odeSystem):
-#     p_nhalf =
-#     q_none=
-#     p_notherhalf=
-#     pass
-#
-#
+def rk2MidPoint(p, q, h, odeSystem):
+    dp, dq = odeSystem(p, q)
+    q12 = q + 0.5 * h * dq
+    k2p, k2q = odeSystem(p + 0.5 * h, q12)
+    q += h * k2q
+    p += h * k2p
+    return p, q
+
+
 def rk4(p, q, h, odeSystem):
     pass
 
@@ -61,7 +63,7 @@ def rk4(p, q, h, odeSystem):
 #     return ln,
 
 if __name__ == "__main__":
-    Fig1, axs = plt.subplots(2, 3)
+    Fig1, axs = plt.subplots(2, 4)
     # Fig1.tight_layout(pad=7.0)
 
     """
@@ -152,6 +154,33 @@ if __name__ == "__main__":
             xdata.append(q)
             ydata.append(p)
         axs[1, 2].plot(xdata, ydata)
+
+    axs[0, 3].set_title("Midpoint Oscillator")
+    for qs in inits_q:
+        q = qs
+        p = 1
+        xdata = []
+        ydata = []
+        for i in range(rangelen):
+            p, q = rk2MidPoint(p, q, h, odeSystem=odeHO)
+            xdata.append(q)
+            ydata.append(p)
+        axs[0, 3].plot(xdata, ydata)
+
+    axs[1, 3].set_title("Midpoint Pendulum")
+    for qs in inits_q:
+        q = qs
+        p = 1
+        xdata = []
+        ydata = []
+        for i in range(rangelen):
+            p, q = rk2MidPoint(p, q, h, odeSystem=odePendulum)
+            xdata.append(q)
+            ydata.append(p)
+        axs[1, 3].plot(xdata, ydata)
+
+
+
 
     Fig1.savefig("leapfrog_subplots.pdf")
     plt.show()
