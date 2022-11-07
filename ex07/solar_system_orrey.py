@@ -66,7 +66,7 @@ if __name__ == "__main__":
     name_orig, r_orig, v_orig, m_orig = readPlanetsNp("SolSystData.dat")
 
     fig, axs = plt.subplots(2, 2)
-
+    fig.tight_layout(pad=1.5)
 
     N = len(r_orig)
 
@@ -150,4 +150,4 @@ if __name__ == "__main__":
     axs2.set_aspect("equal")
 
     plt.savefig("orrery-barycentre.pdf")
-    plt.show()
+    # plt.show()
