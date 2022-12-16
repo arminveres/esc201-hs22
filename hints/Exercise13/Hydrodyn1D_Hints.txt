@@ -1,0 +1,29 @@
+Define a N by 3 matrix U, U_i = (rho_i, rho_u_i, E_i)
+rho_u = rho * u
+
+Then you need to calculate F = [rho*u, rho*u**2 + P, u*(E +P)]
+F[0] = rho*u = U[1]
+F[1] = rho*u**2 + P = rho*u  * u + P = U[1] * U[1]/U[0] + P
+F[2] = U[1]/U[0] * (U[2] + P)
+
+  E = U[2] = 0.5*U[1] * U[1]/U[0] + 0.5 *P
+or
+  0.5 *P = U[2] - 0.5*U[1] * U[1]/U[0]
+e = P / (2 * rho) = P / (2 * U[0])
+         ^-- gamma = 3 in 1-D
+
+def initialCondition1():
+    U = np.zeros((N, 3))
+    for i in range(N):
+		rho = 1
+        if i == N/2:
+            e= 1
+        else:
+           e = 1e-5
+        u = 0
+       
+        E = 0.5 * rho * u**2 + rho * e
+        U[i, 0] = rho
+        U[i, 1] = rho * u
+        U[i, 2] = E
+    return U
