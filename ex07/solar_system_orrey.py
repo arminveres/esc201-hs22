@@ -111,7 +111,7 @@ if __name__ == "__main__":
     axs[1][1].plot(rx[:, 5:9], rz[:, 5:9])
     axs[1][1].set_title("Inner Planets XZ")
 
-    plt.savefig("orrery-planets.pdf")
+    plt.savefig("orrery-planets.png")
 
     print("Plotting Barycentre...")
     # NOTE: calculate from 2008 until today
@@ -149,5 +149,5 @@ if __name__ == "__main__":
     axs2.plot(-new_cx, -new_cy, "-", color="black")
     axs2.set_aspect("equal")
 
-    plt.savefig("orrery-barycentre.pdf")
     # plt.show()
+    plt.savefig("orrery-barycentre.png")

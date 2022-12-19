@@ -49,7 +49,7 @@ def initialCondition():
 # Main
 # --------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
-    fig, axs = plt.subplots(2, 2)
+    fig, axs = plt.subplots(2, 2, layout='constrained')
     rounds = 500
     step_h = 50
 
@@ -69,4 +69,5 @@ if __name__ == "__main__":
     axs[1, 0].set_title("C.T.U.")
     axs[1, 1].imshow(rho)
 
-    plt.show()
+    fig.savefig('finite_volume.png')
+    # plt.show()

@@ -63,7 +63,7 @@ def rk4(p, q, h, odeSystem):
 #     return ln,
 
 if __name__ == "__main__":
-    Fig1, axs = plt.subplots(2, 4)
+    Fig1, axs = plt.subplots(2, 4, layout='constrained')
     # Fig1.tight_layout(pad=7.0)
 
     """
@@ -179,8 +179,5 @@ if __name__ == "__main__":
             ydata.append(p)
         axs[1, 3].plot(xdata, ydata)
 
-
-
-
-    Fig1.savefig("leapfrog_subplots.pdf")
     plt.show()
+    Fig1.savefig("leapfrog_subplots.png")
